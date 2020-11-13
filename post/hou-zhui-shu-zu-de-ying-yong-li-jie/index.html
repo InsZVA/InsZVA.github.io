@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>后缀数组的应用理解 | InsZVA的博客</title>
+<meta name="description" content="" />
+<link rel="shortcut icon" href="https://InsZVA.github.io/favicon.ico">
+<link rel="stylesheet" href="https://InsZVA.github.io/styles/main.css">
+
+<script src="https://InsZVA.github.io/media/js/jquery.min.js"></script>
+<script src="https://InsZVA.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://InsZVA.github.io/media/js/aos.js"></script>
+<script src="https://InsZVA.github.io/media/js/pace.min.js"></script>
+<script src="https://InsZVA.github.io/media/js/view-image.min.js"></script>
+<script src="https://InsZVA.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://InsZVA.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="前言
+字符串一直是短板，之前遇到字符串都是直接跳过，也曾经尝试多次去学习后缀数组，每次都是扫完全文但是不懂。最近终于可以自己用后缀数组去过题目了，简单记录下理解。
+构建
+构建部分主要是倍增的思想，和一些贪心？结论，具体可以参见OI-wiki..." />
+    <meta name="keywords" content="" />
+    <script src="https://InsZVA.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://InsZVA.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://InsZVA.github.io"><img src="" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://InsZVA.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/" class="menu">
+                      首页
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1605270477234" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2020-11-13"><i class="fa fa-calendar"></i><span class="lately">1 小时前</span></time>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+              </div>
+              <h1 class="title ularge white bold">后缀数组的应用理解</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="前言">前言</h2>
+<p>字符串一直是短板，之前遇到字符串都是直接跳过，也曾经尝试多次去学习后缀数组，每次都是扫完全文但是不懂。最近终于可以自己用后缀数组去过题目了，简单记录下理解。</p>
+<h2 id="构建">构建</h2>
+<p>构建部分主要是倍增的思想，和一些贪心？结论，具体可以参见<a href="https://oi-wiki.org/string/sa/">OI-wiki</a>,这里就不再赘述。</p>
+<h2 id="理解">理解</h2>
+<p>假设你需要在一个数组中匹配是否出现一个数字，以及这个数字出现了几次，可以采用哈希的方法，也可以采用排序数组的方法。同样，对于一堆字符串，你也可以通过哈希，或者排序数组的方法来解决这类问题。<br>
+如果这一堆字符串是一个字符串的所有子串，直接存储<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>个子串需要<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>3</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>的时空复杂度，即使采用哈希也只能降到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo><mo>)</mo><mi mathvariant="normal">。</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">缀</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">组</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">下</mi><mi mathvariant="normal">标</mi><mi mathvariant="normal">‘</mi><mi>i</mi><mi mathvariant="normal">‘</mi><mi mathvariant="normal">来</mi><mi mathvariant="normal">代</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">整</mi><mi mathvariant="normal">个</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">缀</mi><mi mathvariant="normal">‘</mi><mi>S</mi><mo>[</mo><mi>i</mi><mo>:</mo><mo>]</mo><mi mathvariant="normal">‘</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">使</mi><mi mathvariant="normal">得</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">储</mi><mi mathvariant="normal">只</mi><mi mathvariant="normal">需</mi><mi mathvariant="normal">要</mi></mrow><annotation encoding="application/x-tex">(O(n^2))。后缀数组就是用下标`i`来代替整个后缀`S[i:]`，使得存储只需要</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">缀</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">组</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">下</span><span class="mord cjk_fallback">标</span><span class="mord">‘</span><span class="mord mathdefault">i</span><span class="mord">‘</span><span class="mord cjk_fallback">来</span><span class="mord cjk_fallback">代</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">个</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">缀</span><span class="mord">‘</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose">]</span><span class="mord">‘</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">储</span><span class="mord cjk_fallback">只</span><span class="mord cjk_fallback">需</span><span class="mord cjk_fallback">要</span></span></span></span>O(n)<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">复</mi><mi mathvariant="normal">杂</mi><mi mathvariant="normal">度</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">构</mi><mi mathvariant="normal">建</mi><mi mathvariant="normal">只</mi><mi mathvariant="normal">需</mi><mi mathvariant="normal">要</mi><mi mathvariant="normal">少</mi><mi mathvariant="normal">于</mi></mrow><annotation encoding="application/x-tex">复杂度，构建只需要少于</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">复</span><span class="mord cjk_fallback">杂</span><span class="mord cjk_fallback">度</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">构</span><span class="mord cjk_fallback">建</span><span class="mord cjk_fallback">只</span><span class="mord cjk_fallback">需</span><span class="mord cjk_fallback">要</span><span class="mord cjk_fallback">少</span><span class="mord cjk_fallback">于</span></span></span></span>O(n\log(n))$复杂度。但是只存后缀怎么来解决对所有子串的操作呢？<br>
+假设我们有一个字符串<code>aabaaaab</code>，他的后缀分别是：</p>
+<pre><code>aabaaaab
+abaaaab
+baaaab
+aaaab
+aaab
+aab
+ab
+b
+</code></pre>
+<p>对它们进行排序：</p>
+<pre><code>aaaab
+aaab
+aab
+aabaaaab
+ab
+abaaaab
+b
+baaaab
+</code></pre>
+<p><strong>任何一个子串一定是某个后缀的前缀</strong>，由于字符串排序实质就是前缀去做比较，所以后缀的排序其实跟所有子串的排序有关，如下：</p>
+<pre><code>aaaab: a &lt; aa &lt; aaa &lt; aaaa &lt; aaaab
+aaab: a &lt; aa &lt; aaa &lt; aaab
+aab: a &lt; aa &lt; aab
+aabaaaab: a &lt; aa &lt; aab &lt; aaba &lt; aabaa &lt; aabaaa &lt; aabaaaa &lt; aabaaaab
+ab: a &lt; ab
+abaaaab: a &lt; ab &lt; aba &lt; abaa &lt; abaaa &lt; abaaaa &lt; abaaaab
+b: b
+baaaab: b &lt; ba &lt; baa &lt; baaa &lt; baaaa &lt; baaaab
+</code></pre>
+<p>但是可以看到，后缀的排序并不完全等于子串的排序，如果我们想知道子串的排序，应该怎么做呢？可以发现对于前3项：</p>
+<pre><code>aaaab: a &lt; aa &lt; aaa &lt; aaaa &lt; aaaab
+aaab: a &lt; aa &lt; aaa &lt; aaab
+aab: a &lt; aa &lt; aab
+</code></pre>
+<p>a和aa这两个子串同时出现在了前3项里面，aaa出现在了前2项里面，与aaa同一列的第3项是aab，aab&gt;aaa。同样可以发现，相邻两个后缀之间有一部分前缀是完全相同的，我们认为这些相同的子串实际在排序中的位置是第一次出现的位置（例如aa应该是第1行第2列），那么我们就得到了所有子串的排序所需要的全部信息。这就是后缀数组的本质：得到所有子串的排序信息。<br>
+为了高效处理相邻的两个后缀之间的相同前缀，我们得到了<code>height</code>数组，<code>height[i]=lcp(sa[i-1]. sa[1])</code>，即<code>height</code>数组存了每个后缀和他之前后缀的最长公共前缀。这个<code>height</code>名字取得也很形象，拿上面3项来说：</p>
+<pre><code>b
+a b
+a a b
+a a a
+a a a
+0 3 2
+</code></pre>
+<p>我们看到<code>height[2]=3</code>,代表了第2个后缀<code>aaab</code>的前缀<code>a</code>和<code>aa</code>和<code>aaa</code>前一项也存在, <code>height[3]=2</code>代表了<code>a</code>和<code>aa</code>在前一个后缀中也存在。这和高度有啥关系呢？在这个例子里面，除去第一项的高度（因为它和空串在做对比）别的都是&gt;=2的，意味着<code>aa</code>及<code>aa</code>的所有前缀存在于所有的后缀中。而对于<code>height[2]=3</code>但是<code>height[3]=2</code>，高度降低了1，意味着<code>aaa</code>这个前缀，在第3个子串之前消失了。<br>
+可以发现，所有<code>height</code>记录的都是出现超过1次的子串信息，将这个数组列成直方图：</p>
+<pre><code> +   +
+ + + +   +
+ + + + + +   +
+</code></pre>
+<p>我们以行视角来看，最底下一行连续出现了5次，然后断开，然后又出现了1次。左边的连续5个代表了<code>a</code>这个子串出现了5+1次，右边的1个代表了<code>b</code>这个子串出现了1次。我们查看原串<code>aabaaaab</code>，的确如此，<code>a</code>出现了6次，<code>b</code>出现了2次。同样我们可以看到高度为2的最开始出现了3次，代表<code>aa</code>这个子串出现了4次。所以**<code>height</code>数组存储了所有出现超过1次的子串的频数信息**。<br>
+这里举个应用的例子，我想知道一个字符串里面不同的子串有多少个。每个<code>height[i]=x</code>的代表有<code>x</code>个子串（即<code>S[i:][:x]</code>的所有前缀）在之前已经存在过了，所以我们可以用所有的子串数量<code>n*(n+1)/2</code>减去所有<code>height</code>的和即可得到。<br>
+那如果我想知道所有仅出现过一次的不同子串有多少个要怎么做呢？对于<code>S[i:]</code>这个后缀，它和之前之后后缀的LCP，都是不满足的，超过2个LCP的全部满足。所以<code>S[i:]</code>这个后缀的所有只出现过一次的不同子串是<code>len(S[i:])-max(height[i], height[i+1])</code>。全部加起来即可。<br>
+如果是想知道所有出现次数为<code>x</code>的子串有多少个要怎么做呢，回到直方图，一行一行来看，第i行连续的长度就是长度为i的子串的出现次数-1。这个就是直方图里面的面积统计，可以用单调栈来做，也可以用分治法来做。我觉得这个单调栈好难写，所以一直都是ST表然后用分治法去做。这里我们可以看出来<code>height</code>数组的名字就是说它可以转为直方图里面的高度，而<code>height</code>数组存储了所有超过1次的子串的频数信息。对于所有子串去统计一些跟子串长度/数量有关系的题目，大多就是这样去做，转化成直方图里面的处理。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://InsZVA.github.io/post-images/hello-gridea.png');"></div>
+                 <a href="https://InsZVA.github.io/post/hello-gridea/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2018-12-12">2018-12-12</time>
+                  <h4 class="title white no-margin">Hello Gridea</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://InsZVA.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                <p>请到客户端“主题--自定义配置--valine”中填入ID和KEY</p>
+              </div>
+              <div class="clear"></div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://InsZVA.github.io/post/hou-zhui-shu-zu-de-ying-yong-li-jie/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2020-11-13">2020-11-13</time>
+                      <h4 class="title usmall">
+                        <a href="https://InsZVA.github.io/post/hou-zhui-shu-zu-de-ying-yong-li-jie/">后缀数组的应用理解</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://InsZVA.github.io/post/about/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2019-01-25">2019-01-25</time>
+                      <h4 class="title usmall">
+                        <a href="https://InsZVA.github.io/post/about/">关于</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://InsZVA.github.io/post/hello-gridea/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://InsZVA.github.io/post-images/hello-gridea.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2018-12-12">2018-12-12</time>
+                      <h4 class="title usmall">
+                        <a href="https://InsZVA.github.io/post/hello-gridea/">Hello Gridea</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://InsZVA.github.io/tag/pF7xI-uaX/" class="ctag ctag-0 ctag-pF7xI-uaX" aria-label="">Gridea</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://InsZVA.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">InsZVA的博客</a></h4>
+                    <p class="founder"></p>
+                    <div class="social">
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://InsZVA.github.io"><img src="" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 3 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+
+      
+    <script src="https://InsZVA.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>
