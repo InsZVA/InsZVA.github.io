@@ -2,13 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://InsZVA.github.io</id>
     <title>InsZVA的博客</title>
-    <updated>2020-11-13T12:31:13.245Z</updated>
+    <updated>2020-11-28T11:33:54.552Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://InsZVA.github.io"/>
     <link rel="self" href="https://InsZVA.github.io/atom.xml"/>
     <logo>https://InsZVA.github.io/images/avatar.png</logo>
     <icon>https://InsZVA.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, InsZVA的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[对冲基金的收益来源]]></title>
+        <id>https://InsZVA.github.io/post/dui-chong-ji-jin-de-shou-yi-lai-yuan/</id>
+        <link href="https://InsZVA.github.io/post/dui-chong-ji-jin-de-shou-yi-lai-yuan/">
+        </link>
+        <updated>2020-11-28T11:05:47.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>在股市里面，如果你不知道谁是韭菜，那么你就是韭菜</p>
+</blockquote>
+<p>证明：对于任意一笔交易，无论是你买了股票，还是卖了股票，你买/卖的时刻一定是有人在以同样的价格卖/买，如果你不明白这里面的奥妙，那么有可能有别人明白，而明白奥妙的人却做着跟你相反的操作，这不是很明显你是韭菜吗？</p>
+<p>那么，对冲基金的收益到底来源于哪里呢？有2部分组成：信息收益和流动性风险收益。</p>
+<h3 id="信息收益">信息收益</h3>
+<h4 id="制造信息">制造信息</h4>
+<p>对冲基金经常收集和制造一些信息，例如收集市场上大量公司的财务信息等，并产出自己对每支股票的分析信息。这些信息可以对基金自己所看多的公司产生向好的建议，以及引导投资者看多。这是第一种信息收益。</p>
+<h4 id="获取信息">获取信息</h4>
+<p>虽然内幕交易是违法的，但是总而言之，总有一些信息不可能是瞬间被所有投资者知道的，即市场不可能完美高效。如果能更快知道一些信息，一定是有收益的。</p>
+<h4 id="套利行为">套利行为</h4>
+<p>股票的价格在一些时候并不是完全聚合了所有相关信息的体现，例如公司发布财报等，一般对股票的影响会是一个趋势，而且这个趋势会持续一段时间。而且市场上存在很多投机者，投机者由于自身的流动性风险以及投机心理（追涨杀跌等）导致他们不会立即修正股票的价格，所以会有一段时间的价格偏差，这就存在收益空间。</p>
+<h3 id="流动性风险">流动性风险</h3>
+<h4 id="市场流动性风险">市场流动性风险</h4>
+<p>流动性较差的股票，往往会卖更低的价格，因为买股票的人担心买了之后出不了，所以要更低的价格才愿意。另外，在流动性较低的时候，买股票的人和卖股票的人的报价可能会有差距，一部分高频交易者，便是通过高频吸抛，为市场提供流动性，同时自身承担流动性风险，但获得收益。</p>
+<h4 id="基金流动性风险">基金流动性风险</h4>
+<p>一些股票融资困难，因为他们有较高保证金要求，资本受限的投资者通过基金购买，所以基金可以获得收益。</p>
+<h4 id="为巨大的需求压力提供流动性">为巨大的需求压力提供流动性</h4>
+<p>如果一个股票不寻常地面临大量购买压力，它的价格被抬高，那么意味着它在未来会回报非常低，而其他的股票会被抛弃，导致拥有低价格和高回报。在这种情况下，可以做到低吸高抛。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[后缀数组的应用理解]]></title>
         <id>https://InsZVA.github.io/post/hou-zhui-shu-zu-de-ying-yong-li-jie/</id>
