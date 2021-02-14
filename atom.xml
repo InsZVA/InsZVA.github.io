@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://InsZVA.github.io</id>
     <title>InsZVA的博客</title>
-    <updated>2021-02-14T08:07:05.161Z</updated>
+    <updated>2021-02-14T08:08:45.663Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://InsZVA.github.io"/>
     <link rel="self" href="https://InsZVA.github.io/atom.xml"/>
@@ -224,7 +224,6 @@ class Price:
 2021-02-14 15:51:04,744 - /Users/lizile/PycharmProjects/quant/main.py[line:165] - INFO: {'date': '20201225', 'cash': 713145.2519999999, 'stock': 391468.0, 'total': 1104613.2519999999, 'rate': 0.10461325199999982, 'base': 0.24448462929475578}
 2021-02-14 15:51:04,756 - /Users/lizile/PycharmProjects/quant/main.py[line:165] - INFO: {'date': '20201228', 'cash': 713145.2519999999, 'stock': 409045.0, 'total': 1122190.2519999999, 'rate': 0.12219025199999978, 'base': 0.2484629294755878}
 2021-02-14 15:51:04,769 - /Users/lizile/PycharmProjects/quant/main.py[line:165] - INFO: {'date': '20201229', 'cash': 713145.2519999999, 'stock': 415989.00000000006, 'total': 1129134.2519999999, 'rate': 0.12913425199999984, 'base': 0.24520795660036176}
-20200101 20201230 27.65 34.85
 2021-02-14 15:51:04,784 - /Users/lizile/PycharmProjects/quant/main.py[line:165] - INFO: {'date': '20201230', 'cash': 713145.2519999999, 'stock': 416639.99999999994, 'total': 1129785.2519999999, 'rate': 0.1297852519999998, 'base': 0.26039783001808336}
 2021-02-14 15:51:04,793 - /Users/lizile/PycharmProjects/quant/main.py[line:132] - INFO: {'code': '000001.SZ', 'cash': 356572.62599999993}交易成功,买入187手,花去355388.825000
 2021-02-14 15:51:04,800 - /Users/lizile/PycharmProjects/quant/main.py[line:165] - INFO: {'date': '20201231', 'cash': 357756.42699999985, 'stock': 781336.0, 'total': 1139092.427, 'rate': 0.13909242700000002, 'base': 0.27667269439421327}
